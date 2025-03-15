@@ -58,8 +58,17 @@ pipeline {
                     // Ensure Python environment is available
                     bat 'pip install -r requirements.txt'
 
-                    // Run the e2e.py script
-                    bat 'cd tests && python e2e.py'  // enter test directory
+                    // Run the e2e.py script from the 'tests' directory and capture the exit code
+                    def result = bat(script: 'python tests/e2e.py', returnStatus: true)
+
+                    // Check the result and fail the pipeline if the tests fail
+                    if (result != 0) {
+                        echo "Test failed with exit code: ${result}"
+                        currentBuild.result = 'FAILURE'
+                        error("Tests failed with exit code: ${result}")
+                    } else {
+                        echo "Tests passed successfully!"
+                    }
 
                     // Fail the pipeline if tests fail
                 }
