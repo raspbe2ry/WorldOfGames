@@ -32,6 +32,8 @@ if __name__ == "__main__":
     parser.add_argument('--url', type=str, help='Url to the app', required=True)
     args = parser.parse_args()
     url = args.url
+    print("Url is:")
+    print(url)
 
     exit_code = main_function(url)
 
