@@ -6,7 +6,7 @@ pipeline {
         CONTAINER_NAME = 'flask-app'
         DOCKER_TAG = 'latest'
         SCORE_FILE = 'Scores.txt'  // Path to the dummy Scores.txt file
-        COMPOSE_FILE = 'docker-compose.yml'  // Path to your docker-compose.yml file
+        COMPOSE_FILE = 'docker-compose.yaml'  // Path to your docker-compose.yml file
     }
     
     stages {
