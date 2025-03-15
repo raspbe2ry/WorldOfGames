@@ -29,7 +29,7 @@ def main_function(application_url: str):
 
 if __name__ == "__main__":
     # Test the service with a provided URL
-    url = "http://127.0.0.1:5000/score"  # Replace with the actual URL
+    url = "http://127.0.0.1:8777/score"  # Replace with the actual URL
     exit_code = main_function(url)
 
     # Exit the program with the corresponding code
