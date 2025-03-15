@@ -60,7 +60,7 @@ pipeline {
                     bat 'pip install -r requirements.txt'
 
                     // Run the e2e.py script from the 'tests' directory and capture the exit code
-                    def result = bat(script: 'python tests/e2e.py --url ${APP_URL}', returnStatus: true)
+                    def result = bat(script: "python tests/e2e.py --url ${APP_URL}", returnStatus: true)
 
                     // Check the result and fail the pipeline if the tests fail
                     if (result != 0) {
