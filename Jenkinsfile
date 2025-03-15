@@ -7,7 +7,7 @@ pipeline {
         DOCKER_TAG = 'latest'
         SCORE_FILE = 'Scores.txt'  // Path to the dummy Scores.txt file
         COMPOSE_FILE = 'docker-compose.yaml'  // Path to your docker-compose.yml file
-        URL = 'http://localhost:8777/score' //App url
+        APP_URL = 'http://localhost:8777/score' //App url
     }
     
     stages {
@@ -60,7 +60,7 @@ pipeline {
                     bat 'pip install -r requirements.txt'
 
                     // Run the e2e.py script from the 'tests' directory and capture the exit code
-                    def result = bat(script: 'python tests/e2e.py --url ${URL}', returnStatus: true)
+                    def result = bat(script: 'python tests/e2e.py --url ${APP_URL}', returnStatus: true)
 
                     // Check the result and fail the pipeline if the tests fail
                     if (result != 0) {
