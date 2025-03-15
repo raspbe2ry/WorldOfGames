@@ -1,8 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
-from webdriver_manager.chrome import ChromeDriverManager
-from selenium.webdriver.chrome.options import Options
+import argparse
 
 def test_scores_service(url):
     chromeService = Service("C:\DevExperts\Lesson_11\WorldOfGames4\WorldOfGames\chromedriver.exe")
@@ -28,8 +27,12 @@ def main_function(application_url: str):
 
 
 if __name__ == "__main__":
-    # Test the service with a provided URL
-    url = "http://127.0.0.1:5000/score"  # Replace with the actual URL
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument('--url', type=str, help='Url to the app', required=True)
+    args = parser.parse_args()
+    url = args.url
+
     exit_code = main_function(url)
 
     # Exit the program with the corresponding code
