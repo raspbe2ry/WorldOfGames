@@ -22,7 +22,7 @@ pipeline {
                 script {
                     // Build the Docker image using Docker Compose
                     echo "Building the Docker image with docker-compose..."
-                    sh """
+                    bat """
                         docker-compose -f ${COMPOSE_FILE} build
                     """
                 }
@@ -37,12 +37,12 @@ pipeline {
                     echo "Starting the Dockerized application with docker-compose..."
 
                     // Stop and remove any existing container
-                    sh """
+                    bat """
                         docker-compose -f ${COMPOSE_FILE} down || true
                     """
 
                     // Run the container with docker-compose
-                    sh """
+                    bat """
                         docker-compose -f ${COMPOSE_FILE} up -d
                     """
                 }
@@ -56,10 +56,10 @@ pipeline {
                     echo "Running tests with Selenium..."
 
                     // Ensure Python environment is available
-                    sh 'pip install -r requirements.txt'
+                    bat 'pip install -r requirements.txt'
 
                     // Run the e2e.py script
-                    sh 'python e2e.py'  // Adjust the command to how you run the Selenium tests
+                    bat 'python e2e.py'  // Adjust the command to how you run the Selenium tests
 
                     // Fail the pipeline if tests fail
                 }
@@ -73,13 +73,13 @@ pipeline {
                     echo "Stopping and cleaning up Docker containers..."
 
                     // Stop and remove the container
-                    sh """
+                    bat """
                         docker-compose -f ${COMPOSE_FILE} down
                     """
 
                     // Push the new image to Docker Hub
                     echo "Pushing the image to Docker Hub..."
-                    sh "docker push ${IMAGE_NAME}:${DOCKER_TAG}"
+                    bat "docker push ${IMAGE_NAME}:${DOCKER_TAG}"
                 }
             }
         }
@@ -90,7 +90,7 @@ pipeline {
         always {
             // Clean up docker resources to ensure the system is clean for the next run
             echo "Cleaning up Docker images..."
-            sh "docker system prune -f"
+            bat "docker system prune -f"
         }
 
         success {
