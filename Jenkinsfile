@@ -59,7 +59,10 @@ pipeline {
                     bat 'pip install -r requirements.txt'
 
                     // Run the e2e.py script
-                    bat 'python /tests/e2e.py'  // Adjust the command to how you run the Selenium tests
+                    bat 'cd tests'  // enter test directory
+                    
+                    // Run the e2e.py script
+                    bat 'python e2e.py'  // Adjust the command to how you run the Selenium tests
 
                     // Fail the pipeline if tests fail
                 }
